@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('anggotas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('nis')->unique();
+            $table->string('email')->unique(); // tambahkan email
+            $table->string('kelas');
+            $table->string('password'); // password harus di-hash saat input
+            $table->enum('status',['aktif','tidak_aktif'])->default('aktif');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('anggotas');
+    }
+};
