@@ -10,25 +10,11 @@ return new class extends Migration
     {
         Schema::create('pengembalians', function (Blueprint $table) {
             $table->id();
-
-            // FOREIGN KEY KE TABEL PEMINJAMAN
-            $table->unsignedBigInteger('peminjaman_id');
-
+            $table->foreignId('peminjaman_id')->constrained('peminjaman')->onDelete('cascade');
             $table->date('tgl_dikembalikan');
-
-            $table->enum('status', [
-                'menunggu_verifikasi',
-                'dikembalikan'
-            ])->default('menunggu_verifikasi');
-
+            $table->string('status');
             $table->timestamps();
-
-            // RELASI KE PEMINJAMAN
-            $table->foreign('peminjaman_id')
-                ->references('id')
-                ->on('peminjamans')
-                ->onDelete('cascade');
-        });
+    });
     }
 
     public function down(): void

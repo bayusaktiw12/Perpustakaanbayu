@@ -21132,4 +21132,89 @@ div.tagsinput {
   -webkit-flex-grow: 1;
   flex-grow: 1; }
 
+  /* SIDEBAR */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #0f172a;
+    position: fixed;
+    padding: 20px;
+    color: white;
+}
+
+/* HEADER */
+.sidebar-header {
+    margin-bottom: 30px;
+}
+
+.sidebar-header h4 {
+    margin: 0;
+}
+
+.sidebar-header small {
+    color: #94a3b8;
+}
+
+/* NAV */
+.nav {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item {
+    margin-bottom: 10px;
+}
+
+.nav-item a {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #cbd5e1;
+    transition: 0.3s;
+}
+
+/* ICON */
+.nav-item i {
+    font-size: 20px;
+    margin-right: 12px;
+    transition: 0.3s;
+}
+
+/* WARNA ICON */
+.icon-dashboard { color: #4dabf7; }
+.icon-buku      { color: #51cf66; }
+.icon-pinjam    { color: #fcc419; }
+.icon-kembali   { color: #845ef7; }
+.icon-denda     { color: #ff922b; }
+.icon-logout    { color: #ff6b6b; }
+
+/* HOVER */
+.nav-item a:hover {
+    background: #1e293b;
+    color: white;
+}
+
+.nav-item a:hover i {
+    transform: scale(1.2);
+    text-shadow: 0 0 8px currentColor;
+}
+
+/* ACTIVE MENU */
+.nav-item.active a {
+    background: linear-gradient(45deg, #2563eb, #1d4ed8);
+    color: white;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+}
+
+.nav-item.active i {
+    color: #ffffff !important;
+}
+
+/* CONTENT SHIFT */
+.page-body-wrapper {
+    margin-left: 250px;
+    padding: 20px;
+}
 /*# sourceMappingURL=maps/style.css.map */

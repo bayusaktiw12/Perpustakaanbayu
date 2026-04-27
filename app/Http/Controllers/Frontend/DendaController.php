@@ -4,48 +4,27 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Pengembalian;
+use App\Models\Denda;
 
 class DendaController extends Controller
 {
     public function index()
     {
+        $denda = Denda::with('pengembalian.peminjaman.user', 'pengembalian.peminjaman.buku')
+                      ->paginate(10);
 
-        // AMBIL DATA DENDA milik anggota login
-        $dendas = Denda::with(['peminjaman.buku'])
-                    ->whereHas('peminjaman', function($q){
-                        $q->where('anggota_id', session('anggota_id'));
-                    })
-                    ->latest()
-                    ->paginate(5);
-
-        // TOTAL DENDA BELUM LUNAS milik anggota login
-        $totalDenda = Denda::where('status','!=','selesai')
-                        ->whereHas('peminjaman', function($q){
-                            $q->where('anggota_id', session('anggota_id'));
-                        })
-                        ->get()
-                        ->sum(function($item){
-                            return $item->hari_terlambat * 1000;
-                        });
-
-
-        return view('page.frontend.denda.index', compact('dendas','totalDenda'));
-
+        return view('page.frontend.denda.index', compact('denda'));
     }
 
-
-
-    /* ===============================
-    DETAIL DENDA
-    =============================== */
-
-    public function detail($id)
+    public function bayar($id)
     {
+        $denda = Denda::findOrFail($id);
 
-        // AMBIL DETAIL DENDA
-        $denda = Denda::with('peminjaman.buku')->findOrFail($id);
+        $denda->update([
+            'status_bayar' => 'lunas'
+        ]);
 
-        return view('page.frontend.denda.show', compact('denda'));
-
+        return redirect()->route('denda.index')->with('success', 'Denda berhasil dibayar');
     }
 }

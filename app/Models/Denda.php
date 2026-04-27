@@ -2,30 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Denda extends Model
 {
-    use HasFactory;
-
-    // Table dendas
-    protected $table = 'dendas';
-
-    // Field yang bisa diisi massal
     protected $fillable = [
-        'peminjaman_id',
-        'hari_terlambat',  // jumlah hari terlambat
-        'total_denda',     // jumlah denda
-        'status'           // menunggu / selesai
+        'pengembalian_id',
+        'jumlah_denda',
+        'status_bayar'
     ];
 
-    /**
-     * Relasi ke peminjaman
-     * Satu denda milik satu peminjaman
-     */
-    public function peminjaman()
+    // Relasi ke Pengembalian
+    public function pengembalian()
     {
-        return $this->belongsTo(Peminjaman::class, 'peminjaman_id', 'id');
+        return $this->belongsTo(Pengembalian::class);
     }
 }

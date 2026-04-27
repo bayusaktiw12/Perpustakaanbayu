@@ -9,16 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bukus', function (Blueprint $table) {
-            $table->id();
-            $table->string('photo')->nullable();
-            $table->string('judul');
-            $table->string('penulis');
-            $table->string('penerbit');
-            $table->string('kategori');
-            $table->integer('stok')->default(0);
-            $table->enum('status', ['Tersedia','Habis'])->default('Tersedia');
-            $table->timestamps();
-        });
+        $table->id();
+        $table->string('judul');
+        $table->string('penulis');
+        $table->string('penerbit');
+        $table->year('tahun');
+        $table->integer('stok');
+        $table->string('cover')->nullable();
+        $table->timestamps();
+   });
     }
 
     public function down(): void
